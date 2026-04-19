@@ -1,0 +1,10 @@
+pytesseract
+easyocr
+opencv-python
+Pillow
+numpy
+pandas
+matplotlib
+torch
+torchvision
+scikit-image
