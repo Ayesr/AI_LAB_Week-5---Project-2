@@ -14,7 +14,7 @@ This project focuses on building and evaluating an OCR (Optical Character Recogn
 
 
 ## 3. Dataset Description
-- Dataset Used : /kaggle/input/datasets/trainingdatapro/ocr-receipts-text-detection
+- Dataset Used : https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection
 - Receipt images (clean, blurry, and noisy samples)  
 - Formats include JPG images (evaluated from 0 to 4 jpg images)  
 - Data sourced from Kaggle / custom dataset  
