@@ -1,130 +1,243 @@
-# OCR Receipt Processing Project
+#  OCR Receipt Processing & Digit Recognition System
 
 ## 1. Project Overview
-This project focuses on building and evaluating an OCR (Optical Character Recognition) pipeline for extracting text from receipt images. The workflow includes image preprocessing, text extraction using multiple OCR engines, and performance comparison between methods.
+This project presents a complete pipeline for **OCR-based receipt text extraction** combined with **image preprocessing and deep learning-based digit recognition**.  
 
+The system integrates:
+- Classical OCR techniques (Tesseract, EasyOCR)
+- Advanced image preprocessing (deskewing, perspective correction)
+- Morphological operations
+- CNN-based handwritten digit classification (MNIST)
 
+---
 
 ## 2. Objectives
-- To extract text from real-world receipt images using OCR techniques  
-- To improve OCR accuracy through image preprocessing  
-- To compare Tesseract OCR and EasyOCR performance  
-- To evaluate the effect of preprocessing on OCR output quality  
+- Extract text from real-world receipt images using OCR  
+- Improve OCR accuracy through preprocessing techniques  
+- Compare Tesseract OCR and EasyOCR performance  
+- Implement perspective correction and automatic deskewing  
+- Demonstrate morphological image operations  
+- Build and train a CNN model for digit recognition  
+- Visualize training performance and predictions  
 
-
+---
 
 ## 3. Dataset Description
-- Dataset Used : https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection
-- Receipt images (clean, blurry, and noisy samples)  
-- Formats include JPG images (evaluated from 0 to 4 jpg images)  
-- Data sourced from Kaggle / custom dataset  
+- **OCR Dataset**:  
+  https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection  
+- Receipt images (clean, blurry, noisy samples)  
+- Format: JPG images  
 
+- **Digit Classification Dataset**:  
+  - MNIST handwritten digits dataset  
+  - 28×28 grayscale images (0–9 classes)
 
+---
 
 ## 4. Image Preprocessing Pipeline
 
 ### 4.1 Grayscale Conversion
-- Converted RGB images to grayscale  
-- Reduced computational complexity  
+- Converts RGB images to grayscale  
+- Reduces computational complexity  
 
 ### 4.2 Noise Reduction
-- Applied Gaussian blur to reduce image noise  
-- Improved text clarity for OCR models  
+- Gaussian blur applied  
+- Improves OCR readability  
 
 ### 4.3 Thresholding Techniques
-- Binary thresholding (fixed threshold)  
-- Adaptive Gaussian thresholding (handles lighting variations)  
+- Binary thresholding  
+- Adaptive Gaussian thresholding  
 
-### 4.4 Purpose of Preprocessing
+### 4.4 Perspective Correction 
+- Corrects distorted or tilted receipt images  
+- Ensures proper alignment  
+
+### 4.5 Automatic Deskewing 
+- Detects skew angle using image geometry  
+- Rotates image to horizontal alignment  
+
+### 4.6 Morphological Operations 
+- **Erosion** → Removes noise  
+- **Dilation** → Expands features  
+- **Opening** → Removes small noise  
+- **Closing** → Fills gaps  
+
+### 4.7 Purpose of Preprocessing
 - Enhance text visibility  
-- Reduce background noise  
+- Reduce noise and distortion  
 - Improve OCR accuracy  
 
-
+---
 
 ## 5. OCR Methods Used
 
 ### 5.1 Tesseract OCR
-- Traditional rule-based OCR engine  
-- Works best on clean and structured text  
-- Requires preprocessing for optimal results  
+- Rule-based OCR engine  
+- Performs well on clean text  
+- Sensitive to noise  
 
 ### 5.2 EasyOCR
-- Deep learning-based OCR model  
-- More robust to noise and distortion  
-- Performs better on real-world images  
+- Deep learning-based OCR  
+- Robust to noise and distortions  
+- Better for real-world images  
 
+---
 
+## 6. CNN Model for Digit Recognition
 
-## 6. Implementation Workflow
+### Architecture
+- Input: 28×28 grayscale images  
+- Convolution layers (feature extraction)  
+- ReLU activation  
+- MaxPooling layers  
+- Flatten layer  
+- Dense layers  
+- Output: Softmax (10 classes)
+
+### Training Details
+- Optimizer: Adam  
+- Loss: Categorical Crossentropy  
+- Batch size: 128  
+- Epochs: 10  
+- Validation split: 0.1  
+
+### Results
+-  Achieved **~99% test accuracy on MNIST**  
+- Good generalization observed  
+
+---
+
+## 7. Implementation Workflow
 
 ### Step 1: Image Loading
-- Loaded images using OpenCV  
+- Load images using OpenCV  
 
 ### Step 2: Preprocessing
-- Applied grayscale, denoising, and thresholding  
+- Grayscale → Denoising → Thresholding  
+- Perspective correction  
+- Deskewing  
+- Morphological processing  
 
 ### Step 3: OCR Extraction
-- Extracted text using Tesseract  
-- Extracted text using EasyOCR  
+- Extract text using Tesseract  
+- Extract text using EasyOCR  
 
-### Step 4: Comparison
-- Compared outputs based on character length  
-- Evaluated confidence scores (EasyOCR)  
+### Step 4: Digit Classification
+- Feed processed images into CNN  
+- Predict digit classes  
 
+### Step 5: Comparison & Evaluation
+- Compare OCR outputs  
+- Analyze confidence scores  
+- Evaluate CNN accuracy  
 
+---
 
-## 7. Key Experiments
+## 8. Key Experiments
 
 ### Experiment 1: Original vs Preprocessed Image
-- OCR performed on raw image  
-- OCR performed on enhanced image  
-- Observed improvement in readability  
+- OCR applied on raw images  
+- OCR applied on enhanced images  
+- Significant improvement observed  
 
 ### Experiment 2: OCR Engine Comparison
-- Tesseract vs EasyOCR outputs compared  
-- EasyOCR performed better on noisy images  
+- Tesseract vs EasyOCR  
+- EasyOCR performs better on noisy data  
 
+### Experiment 3: CNN Performance
+- Training vs validation accuracy plotted  
+- Model convergence verified  
 
+---
 
-## 8. Observations
+## 9. Visualizations
+
+###  Training History
+- Accuracy vs Epochs  
+- Loss vs Epochs  
+
+###  Test Accuracy Comparison
+- Training vs Test accuracy  
+
+###  Predictions Visualization
+- Displayed sample predictions  
+- Verified correct classifications  
+
+---
+
+## 10. Observations
 - Preprocessing significantly improves OCR accuracy  
-- Adaptive thresholding works better under uneven lighting  
-- EasyOCR is more robust for real-world receipts  
-- Tesseract performs better on clean images  
+- Adaptive thresholding handles lighting variations better  
+- Deskewing and perspective correction improve alignment  
+- EasyOCR performs better on noisy receipts  
+- CNN achieves high accuracy on digit recognition  
 
+---
 
+## 11. Challenges Faced
+- Poor image quality (blur, noise)  
+- OCR inconsistencies  
+- Notebook execution order issues  
+- Dependency and variable errors  
+- Handling real-world distortions  
 
-## 9. Challenges Faced
-- Poor image quality (blur and noise)  
-- Inconsistent OCR outputs  
-- Execution order issues in notebook environment  
-- Variable dependency errors (e.g., undefined variables)  
+---
 
+## 12. Learning Outcomes
 
+### 12.1 Image Processing
+- Advanced preprocessing techniques  
+- Morphological operations  
+- Geometric corrections  
 
-## 10. Learning Outcomes
+### 12.2 OCR Systems
+- Rule-based vs deep learning OCR  
+- Impact of preprocessing  
 
-### 10.1 Image Processing Skills
-- Grayscale conversion  
-- Noise reduction techniques  
-- Thresholding methods  
+### 12.3 Deep Learning
+- CNN architecture design  
+- Model training and evaluation  
+- Performance visualization  
 
-### 10.2 OCR Understanding
-- Difference between rule-based and deep learning OCR  
-- Impact of preprocessing on OCR accuracy  
+### 12.4 Programming Skills
+- Debugging pipelines  
+- Modular code design  
+- Workflow management  
 
-### 10.3 Programming Skills
-- Debugging runtime errors in notebooks  
-- Writing modular functions  
-- Managing pipeline execution order  
+### 12.5 Analytical Skills
+- Model comparison  
+- Performance evaluation  
+- Error analysis  
 
-### 10.4 Analytical Skills
-- Comparing model outputs critically  
-- Evaluating OCR confidence vs text length  
-- Understanding trade-offs between OCR systems  
+---
 
+## 13. Key Achievements 
+- ✔ Perspective correction implemented  
+- ✔ Automatic deskewing working  
+- ✔ All 4 morphological operations demonstrated  
+- ✔ OCR pipeline using Tesseract & EasyOCR  
+- ✔ CNN model successfully built  
+- ✔ Achieved ~99% accuracy on MNIST  
+- ✔ Training history plotted  
+- ✔ Test predictions visualized  
 
+---
 
-## 11. Conclusion
-The project demonstrates that OCR performance is highly dependent on image preprocessing and model selection. A combination of Tesseract and EasyOCR, along with proper preprocessing, leads to significantly improved text extraction from receipt images.
+## 14. Future Improvements
+- Extend to full OCR system (structured data extraction)  
+- Use advanced models (CNN + LSTM / Transformers)  
+- Deploy as a web or mobile application  
+- Improve robustness for extreme noise conditions  
+
+---
+
+## 15. Requirements
+
+```txt
+numpy
+opencv-python
+matplotlib
+tensorflow
+keras
+pytesseract
+easyocr
