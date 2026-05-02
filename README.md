@@ -238,6 +238,7 @@ The system integrates:
 ## 15. Requirements
 
 ```txt
+spacy
 numpy
 opencv-python
 matplotlib
