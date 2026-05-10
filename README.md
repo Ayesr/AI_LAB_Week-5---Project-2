@@ -8,7 +8,8 @@ The system integrates:
 - Advanced image preprocessing (deskewing, perspective correction)
 - Morphological image operations
 - CNN-based handwritten digit classification (MNIST)
-
+- Extracts text from real-world receipt images using OCR (Tesseract & EasyOCR).
+- Deploys a FastAPI interface to serve machine learning models
 
 
 ## 2. Objectives
@@ -19,7 +20,9 @@ The system integrates:
 - Implement perspective correction and automatic deskewing  
 - Demonstrate morphological image operations  
 - Build and train a CNN model for digit recognition  
-- Visualize training performance and predictions  
+- Visualize training performance and predictions
+- Deploy the system as a **FastAPI REST API application**  
+- Enable real-time image upload and processing 
 
 
 
@@ -38,6 +41,12 @@ The system integrates:
 - 28×28 grayscale images  
 - 10 classes (digits 0–9)
 
+### Companies Dataset
+- Contains 4 classes
+  --invoice
+  --receipts
+  --memos
+  --forms
 
 
 ## 4. Image Preprocessing Pipeline
@@ -111,9 +120,25 @@ The system integrates:
 - Achieved **~99% test accuracy** on MNIST  
 - Demonstrated strong generalization  
 
+## 7. FastAPI Backend & System Deployment
 
+### 7.1 FastAPI Overview
+The system is deployed using **FastAPI**, enabling real-time interaction with OCR and digit recognition models through REST APIs.
 
-## 7. Implementation Workflow
+FastAPI provides:
+- High-performance asynchronous API handling  
+- Automatic Swagger UI documentation  
+- Easy integration with ML/DL models  
+- Lightweight deployment  
+
+---
+
+### 7.2 Main Application Structure
+
+```bash
+app.py
+```
+## 8. Implementation Workflow
 
 1. **Image Loading**
    - Load receipt images using OpenCV  
@@ -135,11 +160,18 @@ The system integrates:
 5. **Evaluation**
    - Compare OCR outputs  
    - Analyze performance  
-   - Evaluate CNN accuracy  
+   - Evaluate CNN accuracy
+
+6. **FastAPI Deployment**
+   - Wrap OCR and CNN pipeline into REST API endpoints  
+   - Enable real-time image upload and processing  
+   - Return structured JSON responses  
+   - Provide Swagger UI (`/docs`) for testing APIs  
+   - Deploy application using Uvicorn server (`uvicorn app:app --reload`)
 
 
 
-## 8. Key Experiments
+## 9. Key Experiments
 
 ### Experiment 1: Original vs Preprocessed Images
 - OCR applied on raw images  
@@ -154,6 +186,9 @@ The system integrates:
 - Training vs validation accuracy plotted  
 - ✅ Model convergence verified  
 
+### Experiment 3: Trained LogisticRegression Model 
+- classifier determines if a document is an *Invoice, Receipt, Memo or Contract*.
+- Achieved 83.3% accuracy
 
 
 ## 9. Visualizations
@@ -222,7 +257,8 @@ The system integrates:
 - ✔ CNN model successfully built  
 - ✔ Achieved ~99% accuracy on MNIST  
 - ✔ Training history visualized  
-- ✔ Predictions verified  
+- ✔ Predictions verified
+- ✔ Fast API (Application) Deployment
 
 
 
@@ -238,21 +274,29 @@ The system integrates:
 ## 15. Requirements
 
 ```txt
-spacy
-numpy
-opencv-python
-matplotlib
-tensorflow
-keras
+fastapi
+uvicorn
+python-multipart
 pytesseract
-easyocr
-Pillow
+spacy
+scikit-learn
+tensorflow
+joblib
+opencv-python
+pillow
+numpy
 ```
 
+## API Access & Endpoints
+**server execution: uvicorn app:app --host 0.0.0.0 --port 8000 --reload**
 
+**Base URL: https://roseanne-harsh-jacob.ngrok-free.dev**
+
+**Interactive UI: Append /docs to the URL to access Swagger UI.**
 
 ## 👩‍💻 Author
 
 **Ayesha Ameer (shaheenaameer2003@gmail.com)**  
 Physics & Electronics | AI | Computer Vision | NLP  
+
 
