@@ -176,19 +176,20 @@ app.py
 ### Experiment 1: Original vs Preprocessed Images
 - OCR applied on raw images  
 - OCR applied on enhanced images  
-- ✅ Significant improvement observed  
+- Significant improvement observed  
 
 ### Experiment 2: OCR Engine Comparison
 - Tesseract vs EasyOCR  
-- ✅ EasyOCR performs better on noisy data  
+- EasyOCR performs better on noisy data  
 
 ### Experiment 3: CNN Performance
 - Training vs validation accuracy plotted  
-- ✅ Model convergence verified  
+- Model convergence verified  
 
 ### Experiment 3: Trained LogisticRegression Model 
 - classifier determines if a document is an *Invoice, Receipt, Memo or Contract*.
 - Achieved 83.3% accuracy
+- created vectorizer and classifier for deployment
 
 
 ## 9. Visualizations
